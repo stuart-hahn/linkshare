@@ -3,7 +3,12 @@ class LinksController < ApplicationController
     skip_before_action :authenticate_user!, only: [:index]
 
     def index
-        @links = Link.all
+        if params[:category_id] && @category = Category.find_by(id: params[:category_id])
+            @links = @category.links
+        else
+            flash.now[:alert] = "That category doesn't exist" if params[:category_id]
+            @links = Link.all
+        end
     end
 
     def new
@@ -15,7 +20,8 @@ class LinksController < ApplicationController
         if @link.save
             redirect_to link_path(@link), notice: "Link successfully created"
         else
-            render :new, alert: "Failed to created link"
+            flash.now[:alert] = "Failed to created link"
+            render :new
         end
     end
 
