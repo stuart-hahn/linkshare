@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+test = Category.create(title: "test")
+youtube = Link.create(title: "YouTube", url: "https://www.youtube.com/", category: test, user_id: 1)
