@@ -1,11 +1,16 @@
-<%= form_with model: @link, local: true do |f| %>
+<%= form_with model: [@link.category, @link], local: true do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
 
     <%= f.label :url %>
     <%= f.url_field :url %>
 
-    <%= f.collection_select :category_id, Category.all, :id, :title %>
+    <% if !@link.category %>
+        <%= f.label :category_id %>
+        <%= f.collection_select :category_id, Category.all, :id, :title %></br>
+    <% else %>
+        <%= f.hidden_field :category_id %>
+    <% end %>
     
     <%= f.submit %>
 <% end %>

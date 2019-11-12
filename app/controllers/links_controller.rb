@@ -12,7 +12,11 @@ class LinksController < ApplicationController
     end
 
     def new
-        @link = Link.new
+        if params[:category_id] && @category = Category.find_by(id: params[:category_id])
+            @link = @category.links.build
+        else
+            @link = Link.new
+        end
     end
 
     def create
