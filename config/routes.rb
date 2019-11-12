@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root "links#index"
+  
   devise_for :users
   resources :categories
   resources :links
