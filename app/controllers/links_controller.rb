@@ -10,12 +10,16 @@ class LinksController < ApplicationController
     end
 
     def create
-        @link = Link.new(link_params)
+        @link = current_user.links.build(link_params)
         if @link.save
             redirect_to link_path(@link), notice: "Link successfully created"
         else
             render :new, alert: "Failed to created link"
         end
+    end
+
+    def show
+        @link = Link.find_by(id: params[:id])
     end
 
     private
