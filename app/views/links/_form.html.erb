@@ -1,4 +1,6 @@
 <%= form_with model: [@link.category, @link], local: true do |f| %>
+<%= render '/shared/errors', object: @link %>
+
     <%= f.label :title %>
     <%= f.text_field :title %>
 
@@ -11,6 +13,6 @@
     <% else %>
         <%= f.hidden_field :category_id %>
     <% end %>
-    
+
     <%= f.submit %>
 <% end %>
