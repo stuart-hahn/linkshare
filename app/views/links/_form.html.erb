@@ -1,0 +1,11 @@
+<%= form_with model: @link, local: true do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+
+    <%= f.collection_select :category_id, Category.all, :id, :title %>
+    
+    <%= f.submit %>
+<% end %>
