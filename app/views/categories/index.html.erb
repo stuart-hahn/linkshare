@@ -3,6 +3,6 @@
 
 <ul>
 <% @categories.each do |category| %>
-    <li><%= link_to category.title, category_path(category) %> (<%= link_to 'Delete', category_path(category), method: :delete %>)</li>
+    <li><%= link_to category.title, category_path(category) %></li>
 <% end %>
 </ul>
