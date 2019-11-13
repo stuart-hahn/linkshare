@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
     def owns_link?(link)
         current_user == link.user
     end
+    
+    def owns_category?(category)
+        current_user == category.user
+    end
 end

@@ -12,10 +12,10 @@ class LinksController < ApplicationController
     end
 
     def new
-        if params[:category_id]
-            @link = Link.new(category_id: params[:category_id])
+        if params[:category_id] && !Category.exists?(params[:category_id])
+          redirect_to categories_path, alert: "Category not found."
         else
-            @link = Link.new
+          @link = Link.new(category_id: params[:category_id])
         end
     end
 
@@ -30,13 +30,16 @@ class LinksController < ApplicationController
     end
 
     def edit
-        link = Link.find_by(id: params[:id])
-        binding.pry
-        if current_user.owns_link?(link)
-            @link = link
+        if params[:category_id]
+          category = Category.find_by(id: params[:category_id])
+          if category.nil?
+            redirect_to categories_path, alert: "Category not found."
+          else
+            @link = category.links.find_by(id: params[:id])
+            redirect_to catgory_links_path(category), alert: "Link not found." if @link.nil?
+          end
         else
-            flash.now[:alert] = "You do not have permission to edit that link"
-            redirect_back(fallback_location: root_path)
+          @link = Link.find(params[:id])
         end
     end
 
