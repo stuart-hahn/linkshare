@@ -3,8 +3,8 @@ class LinksController < ApplicationController
     skip_before_action :authenticate_user!, only: [:index]
 
     def index
-        if params[:category_id] && @category = Category.find_by(id: params[:category_id])
-            @links = @category.links
+        if params[:category_id]
+            @links = Link.where(category_id: params[:category_id])
         else
             flash.now[:alert] = "That category doesn't exist" if params[:category_id]
             @links = Link.all
@@ -12,8 +12,8 @@ class LinksController < ApplicationController
     end
 
     def new
-        if params[:category_id] && @category = Category.find_by(id: params[:category_id])
-            @link = @category.links.build
+        if params[:category_id]
+            @link = Link.new(category_id: params[:category_id])
         else
             @link = Link.new
         end
