@@ -30,7 +30,14 @@ class LinksController < ApplicationController
     end
 
     def edit
-        @link = Link.find_by(id: params[:id])
+        link = Link.find_by(id: params[:id])
+        binding.pry
+        if current_user.owns_link?(link)
+            @link = link
+        else
+            flash.now[:alert] = "You do not have permission to edit that link"
+            redirect_back(fallback_location: root_path)
+        end
     end
 
     def update
