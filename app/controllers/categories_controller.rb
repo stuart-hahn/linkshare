@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     end
 
     def create
-        @category = Category.new(category_params)
+        @category = current_user.categories.build(category_params)
         if @category.save
             redirect_to category_path(@category), notice: "Category successfully created"
         else
@@ -45,6 +45,6 @@ class CategoriesController < ApplicationController
     private
 
     def category_params
-        params.require(:category).permit(:title)
+        params.require(:category).permit(:title, :user_id)
     end
 end

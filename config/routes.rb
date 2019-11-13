@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
-  resources :categories, only: [:new, :show, :index] do
+  resources :categories, only: [:new, :create, :show, :index] do
     resources :links
   end
   resources :links

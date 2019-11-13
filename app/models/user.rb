@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:github]
 
   has_many :links
-  has_many :categories, through: :links
+  has_many :categories
+  has_many :used_categories, through: :links, source: :category
 
   def self.from_omniauth(auth)  
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
