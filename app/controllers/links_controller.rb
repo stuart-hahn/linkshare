@@ -36,7 +36,7 @@ class LinksController < ApplicationController
             redirect_to categories_path, alert: "Category not found."
           else
             @link = category.links.find_by(id: params[:id])
-            redirect_to catgory_links_path(category), alert: "Link not found." if @link.nil?
+            redirect_to category_links_path(category), alert: "Link not found." if @link.nil?
           end
         else
           @link = Link.find(params[:id])
