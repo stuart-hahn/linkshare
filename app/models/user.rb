@@ -21,4 +21,8 @@ class User < ApplicationRecord
     self == link.user
   end
 
+  def owns_category?(category)
+    self == category.user
+  end
+
 end

@@ -3,6 +3,12 @@
 
 <ul>
 <% @categories.each do |category| %>
-    <li><%= link_to category.title, category_path(category) %></li>
+    <li>
+    <%= link_to category.title, category_path(category) %>
+    <% if current_user.owns_category?(category) %>
+        <%= link_to "edit", edit_category_path(category) %> | 
+        <%= link_to "delete", category_path(category), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %> 
+    </li>
 <% end %>
 </ul>
