@@ -8,7 +8,7 @@
     <%= f.url_field :url %>
 
     <% if @link.category %>
-        <%= f.hidden_field :category %>
+        <%= f.hidden_field :category_id %>
     <% else %>
         <%= f.label :category_id %>
         <%= f.collection_select :category_id, Category.all, :id, :title %>

@@ -4,7 +4,7 @@
 <% @links.each do |link| %>
     <li>
     <%= link_to link.title, link.url %>
-    <% if current_user.owns_link?(link) %>
+    <% if current_user && current_user.owns_link?(link) %>
          | <%= link_to "edit", edit_link_path(link) %> | 
         <%= link_to "delete", link, method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>    
