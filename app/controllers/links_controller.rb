@@ -72,8 +72,26 @@ class LinksController < ApplicationController
 
         if current_user.upvoted?(@link)
             current_user.remove_vote(@link)
+        elsif current_user.downvoted?(@link)
+            current_user.remove_vote(@link)
+            current_user.upvote(@link)
         else
             current_user.upvote(@link)
+        end
+
+        redirect_back(fallback_location: root_path)
+    end
+
+    def downvote
+        set_link
+
+        if current_user.downvoted?(@link)
+            current_user.remove_vote(@link)
+        elsif current_user.upvoted(@link)
+            current_user.remove_vote(@link)
+            current_user.downvote(@link)
+        else
+            current_user.downvote(@link)
         end
 
         redirect_back(fallback_location: root_path)
