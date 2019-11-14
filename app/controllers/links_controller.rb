@@ -87,7 +87,7 @@ class LinksController < ApplicationController
 
         if current_user.downvoted?(@link)
             current_user.remove_vote(@link)
-        elsif current_user.upvoted(@link)
+        elsif current_user.upvoted?(@link)
             current_user.remove_vote(@link)
             current_user.downvote(@link)
         else

@@ -4,7 +4,8 @@
 <% @links.each do |link| %>
     <li>
     <%= link_to "upvote (#{link.upvotes})", upvote_link_path(link), method: :post %> | 
-    <%= pluralize(link.points, 'point') %> | 
+    <%= link_to "downvote (#{link.downvotes})", downvote_link_path(link), method: :post %>
+    <%= pluralize(link.total_points, 'point') %> | 
     <%= link_to link.title, link.url %>
     <% if current_user && current_user.owns_link?(link) %>
          | <%= link_to "edit", edit_link_path(link) %> | 
