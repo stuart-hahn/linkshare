@@ -9,4 +9,8 @@ class Link < ApplicationRecord
   def upvotes
     votes.sum(:upvote)
   end
+
+  def downvotes
+    votes.sum(:downvote)
+  end
 end
