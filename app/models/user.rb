@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def upvoted?(link)
-    votes.exist?(upvote: 1, link: link)
+    votes.exists?(upvote: 1, link: link)
   end
 
   def remove_vote(link)
