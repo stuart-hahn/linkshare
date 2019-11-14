@@ -44,7 +44,7 @@ class LinksController < ApplicationController
     end
 
     def update
-        @link = Link.find_by(id: params[:id])
+        set_link
         if @link.update(link_params)
             redirect_to link_path(@link)
         else
@@ -64,10 +64,21 @@ class LinksController < ApplicationController
     end
 
     def show
-        @link = Link.find_by(id: params[:id])
+        set_link
+    end
+
+    def upvote
+        set_link
+        current_user.upvote(@link)
+
+        redirect_back(fallback_location: root_path)
     end
 
     private
+
+    def set_link
+        @link = Link.find_by(id: params[:id])
+    end
 
     def link_params
         params.require(:link).permit(:title, :url, :category_id)
