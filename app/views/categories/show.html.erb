@@ -1,9 +1,13 @@
 <h1><%= @category.title %></h1>
+<%= link_to 'Add a new ' + @category.title + ' link', new_category_link_path(@category) %>
 
 <p>Links:</p>
 <ul>
-<% @category.links.each do |link| %>
+<% @category.links.trending.each do |link| %>
     <li>
+    <%= link_to "upvote (#{link.upvotes})", upvote_link_path(link), method: :post %> | 
+    <%= link_to "downvote (#{link.downvotes})", downvote_link_path(link), method: :post %> | 
+    <%= pluralize(link.total_points, 'point') %> | 
     <%= link_to link.title, link_url %>
     <% if current_user.owns_link?(link) %>
         (<%= link_to "edit", edit_link_path(link) %>,

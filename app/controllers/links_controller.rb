@@ -3,7 +3,7 @@ class LinksController < ApplicationController
     skip_before_action :authenticate_user!, only: [:index]
 
     def index
-        if params[:category_id]
+        if params[:category_id] && Category.exists?(params[:category_id])
             @links = Link.where(category_id: params[:category_id]).trending
         else
             flash.now[:alert] = "That category doesn't exist" if params[:category_id]
