@@ -4,10 +4,10 @@ class LinksController < ApplicationController
 
     def index
         if params[:category_id]
-            @links = Link.where(category_id: params[:category_id])
+            @links = Link.where(category_id: params[:category_id]).trending
         else
             flash.now[:alert] = "That category doesn't exist" if params[:category_id]
-            @links = Link.all
+            @links = Link.trending
         end
     end
 
@@ -78,7 +78,8 @@ class LinksController < ApplicationController
         else
             current_user.upvote(@link)
         end
-
+        
+        @link.calc_trending
         redirect_back(fallback_location: root_path)
     end
 
@@ -94,7 +95,12 @@ class LinksController < ApplicationController
             current_user.downvote(@link)
         end
 
+        @link.calc_trending
         redirect_back(fallback_location: root_path)
+    end
+
+    def newest
+        @links = Link.newest
     end
 
     private
