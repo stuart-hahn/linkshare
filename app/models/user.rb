@@ -26,4 +26,8 @@ class User < ApplicationRecord
     self == category.user
   end
 
+  def upvote(link)
+    votes.create(upvote: 1, link: link)
+  end
+
 end
