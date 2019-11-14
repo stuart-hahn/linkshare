@@ -5,4 +5,8 @@ class Link < ApplicationRecord
 
   validates :title, presence: true
   validates :url, presence: true
+
+  def upvotes
+    votes.sum(:upvote)
+  end
 end

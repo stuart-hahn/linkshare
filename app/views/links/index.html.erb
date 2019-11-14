@@ -3,6 +3,7 @@
 <ul>
 <% @links.each do |link| %>
     <li>
+    <%= link_to "upvote (#{link.upvotes})", upvote_link_path(link), method: :post %> | 
     <%= pluralize(link.points, 'point') %> | 
     <%= link_to link.title, link.url %>
     <% if current_user && current_user.owns_link?(link) %>
