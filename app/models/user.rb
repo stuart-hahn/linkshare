@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :links
   has_many :categories
   has_many :used_categories, through: :links, source: :category
+  has_many :votes
 
   def self.from_omniauth(auth)  
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

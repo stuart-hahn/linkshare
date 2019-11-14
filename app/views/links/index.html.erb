@@ -3,6 +3,7 @@
 <ul>
 <% @links.each do |link| %>
     <li>
+    <%= pluralize(link.points, 'point') %> | 
     <%= link_to link.title, link.url %>
     <% if current_user && current_user.owns_link?(link) %>
          | <%= link_to "edit", edit_link_path(link) %> | 
